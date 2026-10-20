@@ -90,6 +90,10 @@ body {
   display: block;
 }
 
+.mobile-top-edge {
+  display: none;
+}
+
 /* Modrá linka: decentní 2px azurová hrana ladící s materiálem */
 .blue-edge-line .edge-stroke-line {
   stroke: rgba(148, 163, 184, 0.25);
@@ -800,38 +804,402 @@ body {
 }
 
 @media (max-width: 900px) {
+  /* Přechod z 3 pevných desktopových sloupců do responzivního gridu */
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    overflow-x: hidden;
+  }
+
+  /* Hlavní obsah se roztáhne přes celou šířku nahoře */
+  .grey-section {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 2.5rem 1.2rem 2rem 1.2rem;
+    overflow-y: visible;
+    height: auto;
+  }
+
+  .content-wrapper {
+    max-width: 100%;
+  }
+
+  /* Responzivní hlavní nadpis */
+  .main-title {
+    font-size: clamp(2rem, 8.5vw, 2.9rem);
+    letter-spacing: 2px;
+    margin-bottom: 0.35rem;
+  }
+
+  .teams-versus-subtitle {
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    gap: 0.6rem;
+    margin-bottom: 1.8rem;
+  }
+
+  /* Info karty KDE a KDY */
+  .event-meta-grid {
+    gap: 0.75rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .event-meta-card {
+    padding: 0.85rem 0.95rem;
+  }
+
+  .meta-card-label {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+  }
+
+  .meta-card-value {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  /* Pravidla */
+  .rules-block {
+    margin-bottom: 1.5rem;
+  }
+
+  .rules-text {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .down-arrow-container {
+    margin-top: 0.75rem;
+  }
+
+  /* 5 herních karet: nahoře 3, dole 2 vycentrované */
+  .games-section {
+    margin-bottom: 2.2rem;
+  }
+
+  .games-row {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.55rem;
+  }
+
+  .game-card:nth-child(1) { grid-column: span 2; }
+  .game-card:nth-child(2) { grid-column: span 2; }
+  .game-card:nth-child(3) { grid-column: span 2; }
+  .game-card:nth-child(4) { grid-column: 2 / span 2; }
+  .game-card:nth-child(5) { grid-column: 4 / span 2; }
+
+  .game-title-bar {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.2rem;
+    min-height: 2.4rem;
+    line-height: 1.2;
+  }
+
+  /* Seznam Co s sebou */
+  .gear-clean-list {
+    gap: 0.65rem;
+  }
+
+  .gear-clean-item {
+    padding: 0.75rem 0.9rem;
+    gap: 0.85rem;
+  }
+
+  .gear-num-badge {
+    font-size: 1.05rem;
+    min-width: 22px;
+  }
+
+  .gear-item-heading {
+    font-size: 0.95rem;
+  }
+
+  .gear-item-sub {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  /* Výzva k volbě týmu */
+  .team-choice-banner {
+    gap: 0.6rem;
+    padding: 1.1rem 0.8rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .team-choice-title {
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    letter-spacing: 1px;
+  }
+
+  .choice-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .choice-arrow svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Na mobilu šipky směřují dolů k týmům */
+  .arrow-blue {
+    animation: pulseDownBlue 1.6s infinite ease-in-out;
+  }
+
+  .arrow-red {
+    animation: pulseDownRed 1.6s infinite ease-in-out;
+  }
+
+  .arrow-blue svg {
+    transform: rotate(-90deg);
+  }
+
+  .arrow-red svg {
+    transform: rotate(90deg);
+  }
+
+  @keyframes pulseDownBlue {
+    0%, 100% {
+      transform: translateY(0);
+      filter: drop-shadow(0 0 2px rgba(96, 165, 250, 0.5));
+    }
+    50% {
+      transform: translateY(5px);
+      filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.9));
+    }
+  }
+
+  @keyframes pulseDownRed {
+    0%, 100% {
+      transform: translateY(0);
+      filter: drop-shadow(0 0 2px rgba(248, 113, 113, 0.5));
+    }
+    50% {
+      transform: translateY(5px);
+      filter: drop-shadow(0 0 10px rgba(248, 113, 113, 0.9));
+    }
+  }
+
+  /* Na mobilu jsou barvy zobrazené trvale */
+  .versus-blue {
+    color: #60a5fa;
+  }
+
+  .versus-red {
+    color: #f87171;
+  }
+
+  .event-meta-card:nth-child(1) {
+    border-top-color: #3b82f6;
+  }
+
+  .event-meta-card:nth-child(2) {
+    border-top-color: #ef4444;
+  }
+
+  /* Týmové bloky s kapitány: vedle sebe jako souboj dole pod obsahem, trvale v barvách, nenaklikávatelné */
+  .blue-section {
+    grid-column: 1;
+    grid-row: 2;
+    position: relative;
+    height: 380px;
+    min-height: 380px;
+    margin-right: -20px;
+    margin-left: 0;
+    padding: 0.8rem;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .red-section {
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
+    height: 380px;
+    min-height: 380px;
+    margin-left: -20px;
+    margin-right: 0;
+    padding: 0.8rem;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .blue-surface {
+    background-color: #1351d8;
+    opacity: 1;
+    filter: grayscale(0) saturate(1.1) brightness(1);
+    clip-path: polygon(
+      0% 5px,
+      35% 26px,
+      42% 10px,
+      78% 28px,
+      calc(100% - 35px) 5px,
+      100% 18%,
+      calc(100% - 30px) 21%,
+      calc(100% - 5px) 46%,
+      calc(100% - 35px) 49%,
+      100% 75%,
+      calc(100% - 25px) 78%,
+      calc(100% - 10px) 100%,
+      0% 100%
+    );
+  }
+
+  .red-surface {
+    background-color: #c62828;
+    opacity: 1;
+    filter: grayscale(0) saturate(1.1) brightness(1);
+    clip-path: polygon(
+      15px 5px,
+      35% 28px,
+      42% 10px,
+      78% 26px,
+      100% 5px,
+      100% 100%,
+      40px 100%,
+      25px 86%,
+      55px 83%,
+      12px 63%,
+      50px 60%,
+      25px 39%,
+      55px 36%,
+      20px 16%,
+      50px 14%
+    );
+  }
+
+  .blue-edge-line {
+    width: 35px;
+  }
+
+  .blue-edge-line .edge-stroke-line {
+    stroke: #93c5fd;
+  }
+
+  .red-edge-line {
+    width: 35px;
+  }
+
+  .red-edge-line .edge-stroke-line {
+    stroke: #fca5a5;
+  }
+
+  /* Horní světlé tenké linky podél bleskových zubů na mobilu */
+  .mobile-top-edge {
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 35px;
+    pointer-events: none;
+    z-index: 8;
+    overflow: visible;
+  }
+
+  .blue-top-stroke {
+    left: 0;
+    width: calc(100% - 35px);
+  }
+
+  .blue-top-stroke .edge-stroke-line {
+    stroke: #93c5fd;
+    stroke-width: 2;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    fill: none;
+  }
+
+  .red-top-stroke {
+    left: 15px;
+    width: calc(100% - 15px);
+  }
+
+  .red-top-stroke .edge-stroke-line {
+    stroke: #fca5a5;
+    stroke-width: 2;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    fill: none;
+  }
+
+  .koda-photo {
+    left: -35px;
+    height: 350px;
+    max-height: 350px;
+    bottom: 0;
+    opacity: 1;
+    filter: grayscale(0) drop-shadow(2px 0 10px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 16px rgba(59, 130, 246, 0.7)) brightness(1.1) saturate(1.15);
+    pointer-events: none;
+  }
+
+  .team-koda-title {
+    font-size: 1.3rem;
+    bottom: 1rem;
+    left: 0.7rem;
+    letter-spacing: 1.5px;
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 1), 0 0 16px rgba(59, 130, 246, 0.7);
+  }
+
+  .kinaj-photo {
+    right: -35px;
+    height: 355px;
+    max-height: 355px;
+    bottom: 0;
+    opacity: 1;
+    filter: grayscale(0) drop-shadow(-2px 0 10px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 16px rgba(239, 68, 68, 0.7)) brightness(1.05) saturate(1.0);
+    pointer-events: none;
+  }
+
+  .team-kinaj-title {
+    font-size: 1.3rem;
+    bottom: 1rem;
+    right: 0.7rem;
+    letter-spacing: 1.5px;
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 1), 0 0 16px rgba(239, 68, 68, 0.7);
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2.2rem;
+  }
+
+  .event-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
   .blue-section,
   .red-section {
-    position: relative;
-    height: auto;
-    min-height: 360px;
+    height: 330px;
+    min-height: 330px;
   }
+
   .koda-photo {
-    left: -14vh;
-    height: 70vh;
-    max-height: 420px;
+    height: 310px;
+    max-height: 310px;
+    left: -30px;
   }
-  .team-koda-title {
-    font-size: 2.2rem;
-    bottom: 22vh;
-    left: 1.2rem;
-  }
+
   .kinaj-photo {
-    right: -15vh;
-    height: 72vh;
-    max-height: 430px;
+    height: 315px;
+    max-height: 315px;
+    right: -30px;
   }
+
+  .team-koda-title,
   .team-kinaj-title {
-    font-size: 2.2rem;
-    bottom: 22vh;
-    right: 1.2rem;
-  }
-  .team-choice-banner {
-    gap: 0.8rem;
-    padding: 1.2rem 1rem;
-  }
-  .team-choice-title {
-    font-size: 1.45rem;
+    font-size: 1.15rem;
+    bottom: 0.8rem;
   }
 }
 
